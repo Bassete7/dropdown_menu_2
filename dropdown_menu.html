@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown menu</title>
+</head>
+
+<style>
+    *,::before,::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    body{
+        box-sizing: border-box;
+        font-family: 'Courier New', Courier, monospace;
+        height: 100vh;
+        background: linear-gradient(to bottom left, rgb(95, 95, 255), blue);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        position: relative;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all .4s;
+    }
+    a:hover{
+        color: rgb(0, 55, 255);
+    }
+    li{
+        list-style: none;
+    }
+    .container__header{
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        column-gap: 1.5rem;
+        padding: 1rem;
+    }
+    .image__container{
+        width: 70px;
+        height: 70px;
+        background-image: url('./profile.jpg');
+        background-size: cover;
+        border-radius: 50%;
+    }
+    .container__list{
+        border-top: 1px solid rgba(128, 128, 128, 0.355);
+        position: relative;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.1rem;
+        padding: 0 1rem;
+        height: 0px;
+        overflow: hidden;
+        transition: all .3s ease;
+    }
+    .container__list.active{
+        height: 200px;
+        padding-block: 1rem;
+    }
+    .arrow-up{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: .4rem;
+        background-color: #00d5ff;
+        border: none;
+        cursor: pointer;
+    }
+    .arrow-up ion-icon{
+        font-size: 1.1rem;
+        color: white;
+        transform: rotate(-180deg);
+        transition: all .3s;
+    }
+    .arrow-up.active ion-icon{
+        transform: rotate(0);
+    }
+
+</style>
+<body>
+
+    <div class="container">
+        <div class="container__header">
+            <div class="image__container"></div>
+            <div class="titles">
+                <h2>Someone famous</h2>
+                <p>Website Designer</p>
+            </div>
+        </div>
+        <ul class="container__list">
+            <li class="list-item">
+                <a href="#">
+                    <ion-icon name="person-outline"></ion-icon>
+                    Edit profile
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="#">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    Inbox
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="#">
+                    <ion-icon name="settings-outline"></ion-icon>
+                    Settings
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="#">
+                    <ion-icon name="help-circle-outline"></ion-icon>
+                    Support
+                </a>
+            </li>
+            <li class="list-item">
+                <a href="#">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    Logout
+                </a>
+            </li>
+        </ul>
+        <button class="arrow-up">
+            <ion-icon name="chevron-up-outline"></ion-icon>
+        </button>
+    </div>
+    
+
+    <script>
+        let btn = document.querySelector('.arrow-up');
+        let container = document.querySelector('.container');
+
+        btn.addEventListener('click', ()=>{
+            container.querySelector('.container__list').classList.toggle('active');
+            btn.classList.toggle('active');
+        })
+
+        window.addEventListener('click', (e)=>{
+            if(e.target.closest('.container'))
+                return;
+            container.querySelector('.container__list').classList.remove('active');
+            btn.classList.remove('active');
+        })
+    </script>
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
